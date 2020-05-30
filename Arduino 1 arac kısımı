@@ -6,6 +6,9 @@
 //required libraries
 #include <Wire.h>
 
+//buzzer pin
+int buzzer_pin=7;
+
 //// Fan parameter
 int fan_pin = 6;  // pin for the fan
 
@@ -46,6 +49,7 @@ void setup() {
   pinMode(left2, OUTPUT);
   pinMode(left_en, OUTPUT);
   pinMode(fan_pin, OUTPUT);
+  pinMode(buzzer_pin, OUTPUT);
   Serial.begin(9600);
   Wire.begin(2);  // Determined as slave
   Wire.onReceive(receiveEvent);
@@ -84,6 +88,9 @@ void loop() {
     }
     if (distance < 30) {
       stopp();
+      digitalWrite(buzzer_pin,HIGH);
+      delay(500);
+      digitalWrite(buzzer_pin,LOW);
     }
   }
 
